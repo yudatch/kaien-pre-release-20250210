@@ -1,0 +1,39 @@
+### 環境変数
+@baseUrl = http://localhost:3001/api
+
+### プロジェクト一覧の取得
+GET {{baseUrl}}/projects
+Content-Type: application/json
+
+### プロジェクトの詳細取得
+GET {{baseUrl}}/projects/1
+Content-Type: application/json
+
+### 新規プロジェクトの作成
+POST {{baseUrl}}/projects
+Content-Type: application/json
+
+{
+    "name": "テストプロジェクト",
+    "description": "これはテストプロジェクトです",
+    "startDate": "2024-01-07",
+    "endDate": "2024-12-31",
+    "customerId": 1,
+    "status": "進行中"
+}
+
+### プロジェクト情報の更新
+PUT {{baseUrl}}/projects/1
+Content-Type: application/json
+
+{
+    "name": "更新テストプロジェクト",
+    "description": "プロジェクト説明を更新",
+    "startDate": "2024-01-07",
+    "endDate": "2024-12-31",
+    "status": "完了"
+}
+
+### プロジェクトの削除
+DELETE {{baseUrl}}/projects/1
+Content-Type: application/json 

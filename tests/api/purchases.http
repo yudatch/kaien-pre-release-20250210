@@ -1,0 +1,52 @@
+### 環境変数
+@baseUrl = http://localhost:3001/api
+
+### 購買一覧の取得
+GET {{baseUrl}}/purchases
+Content-Type: application/json
+
+### 購買の詳細取得
+GET {{baseUrl}}/purchases/1
+Content-Type: application/json
+
+### 新規購買の作成
+POST {{baseUrl}}/purchases
+Content-Type: application/json
+
+{
+    "projectId": 1,
+    "orderDate": "2024-01-07",
+    "deliveryDate": "2024-01-14",
+    "status": "発注済",
+    "items": [
+        {
+            "name": "商品A",
+            "quantity": 2,
+            "unitPrice": 1000,
+            "description": "テスト商品A"
+        }
+    ],
+    "totalAmount": 2000
+}
+
+### 購買情報の更新
+PUT {{baseUrl}}/purchases/1
+Content-Type: application/json
+
+{
+    "status": "納品完了",
+    "deliveryDate": "2024-01-14",
+    "items": [
+        {
+            "name": "商品A",
+            "quantity": 3,
+            "unitPrice": 1000,
+            "description": "テスト商品A"
+        }
+    ],
+    "totalAmount": 3000
+}
+
+### 購買の削除
+DELETE {{baseUrl}}/purchases/1
+Content-Type: application/json 

@@ -1,0 +1,36 @@
+### 環境変数
+@baseUrl = http://localhost:3001/api
+
+### 顧客一覧の取得
+GET {{baseUrl}}/customers
+Content-Type: application/json
+
+### 顧客の詳細取得
+GET {{baseUrl}}/customers/1
+Content-Type: application/json
+
+### 新規顧客の作成
+POST {{baseUrl}}/customers
+Content-Type: application/json
+
+{
+    "name": "テスト顧客",
+    "email": "test@example.com",
+    "phone": "03-1234-5678",
+    "address": "東京都渋谷区"
+}
+
+### 顧客情報の更新
+PUT {{baseUrl}}/customers/1
+Content-Type: application/json
+
+{
+    "name": "更新テスト顧客",
+    "email": "updated@example.com",
+    "phone": "03-1234-5678",
+    "address": "東京都新宿区"
+}
+
+### 顧客の削除
+DELETE {{baseUrl}}/customers/1
+Content-Type: application/json 

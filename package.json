@@ -1,0 +1,87 @@
+{
+  "name": "business-management-app",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:NODE_OPTIONS='--max-old-space-size=4096'; start-process -NoNewWindow powershell -ArgumentList '-NoProfile','-Command','cd frontend; rimraf .next; npx tsx scripts/start-dev.ts'; docker compose -f docker-compose.yml -f docker-compose.dev.yml up\"",
+    "dev:build": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:NODE_OPTIONS='--max-old-space-size=4096'; start-process -NoNewWindow powershell -ArgumentList '-NoProfile','-Command','cd frontend; rimraf .next; npx tsx scripts/start-dev.ts'; docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build\"",
+    "prod": "docker compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.production up -d",
+    "prod:build": "docker compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.production up -d --build",
+    "down": "docker compose down",
+    "clean": "npm run clean:docker && npm run clean:modules",
+    "clean:docker": "docker compose down -v && docker system prune -f --volumes",
+    "clean:modules": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path frontend/.next) { Remove-Item -Recurse -Force frontend/.next -ErrorAction SilentlyContinue }; if (Test-Path frontend/node_modules) { Remove-Item -Recurse -Force frontend/node_modules -ErrorAction SilentlyContinue }; if (Test-Path backend/node_modules) { Remove-Item -Recurse -Force backend/node_modules -ErrorAction SilentlyContinue }\"",
+    "electron:dev": "cross-env NODE_ENV=development node scripts/electron-dev.js",
+    "electron:dev:clean": "npm run clean && npm run electron:dev",
+    "electron:build": "next build && electron-builder",
+    "electron:package": "electron-builder --dir",
+    "electron:make": "electron-builder",
+    "electron:dev:full": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d && npm run electron:dev",
+    "clean:full": "docker compose down -v && docker volume rm accounting-software_postgres-data accounting-software_postgres_data",
+    "frontend:dev": "cd frontend && npm run dev",
+    "backend:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.17.6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "axios": "^1.7.7",
+    "concurrently": "^9.1.0",
+    "critters": "^0.0.20",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-is-dev": "^3.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "open": "^8.4.2",
+    "open-cli": "^7.2.0",
+    "postcss": "^8",
+    "rimraf": "^5.0.1",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.yourcompany.business-management-app",
+    "files": [
+      "electron/**/*",
+      "frontend/.next/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.5",
+    "@mui/x-date-pickers": "^6.19.0",
+    "@react-pdf/renderer": "^4.1.6",
+    "@reduxjs/toolkit": "^2.0.1",
+    "@tanstack/react-query": "^5.60.5",
+    "@tanstack/react-query-devtools": "^5.60.5",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "date-fns": "^3.0.0",
+    "dayjs": "^1.11.10",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
+    "next": "14.0.4",
+    "postcss": "^8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
+    "tailwindcss": "^3.4.1",
+    "yup": "^1.3.3"
+  },
+  "volta": {
+    "node": "18.20.4"
+  }
+}

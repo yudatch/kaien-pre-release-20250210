@@ -1,0 +1,23 @@
+# 本番環境設定
+services:
+  frontend:
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.example.com
+      - NODE_ENV=production
+
+  backend:
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=accounting_software_db
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - NODE_ENV=production
+
+  postgres:
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./init/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql 

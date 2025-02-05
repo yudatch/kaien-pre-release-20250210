@@ -1,0 +1,12 @@
+appId: com.yourcompany.business-management-app
+productName: Business Management System
+directories:
+  output: dist
+  buildResources: build
+files:
+  - electron/**/*
+  - frontend/.next/**/*
+  - frontend/public/**/*
+  - package.json
+extraMetadata:
+  main: electron/main.js 

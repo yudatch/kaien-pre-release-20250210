@@ -1,0 +1,43 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app:delegated
+      - backend-node-modules:/app/node_modules
+    environment:
+      - NODE_OPTIONS="--max-old-space-size=2048"
+      - TS_NODE_TRANSPILE_ONLY=true
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:15-alpine
+    command: >
+      postgres
+        -c shared_buffers=512MB
+        -c work_mem=32MB
+        -c maintenance_work_mem=256MB
+        -c effective_cache_size=2GB
+        -c random_page_cost=1.1
+        -c max_parallel_workers=4
+        -c max_parallel_workers_per_gather=2
+        -c max_connections=100
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1500
+
+volumes:
+  backend-node-modules:

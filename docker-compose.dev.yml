@@ -1,0 +1,98 @@
+# 開発環境固有の設定
+services:
+  backend:
+    environment:
+      - NODE_ENV=development
+      - NODE_OPTIONS=--max-old-space-size=2048
+      - TS_NODE_TRANSPILE_ONLY=true
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=accounting_software_db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - TS_NODE_FILES=false
+      - TS_NODE_PROJECT=./tsconfig.json
+      - TS_NODE_CACHE_DIRECTORY=/tmp/.ts-node-cache
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=1000
+      - DEBUG=app:*
+      - LOG_LEVEL=debug
+      - V8_HEAP_SIZE_MODIFIER=0.8
+      - UV_THREADPOOL_SIZE=8
+      - FORCE_COLOR=1
+      - WAIT_HOSTS=postgres:5432
+      - WAIT_TIMEOUT=600
+      - WAIT_SLEEP_INTERVAL=10
+      - WAIT_HOST_CONNECT_TIMEOUT=300
+    ports:
+      - "3001:3001"
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /app
+      - type: volume
+        source: backend-node-modules
+        target: /app/node_modules
+      - type: volume
+        source: ts-node-cache
+        target: /tmp/.ts-node-cache
+    develop:
+      watch:
+        - path: ./backend/src
+          target: /app/src
+          action: sync
+          ignore:
+            - node_modules
+            - "*.test.ts"
+            - "*.spec.ts"
+            - "*.log"
+            - dist
+            - .git
+            - coverage
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1"]
+      interval: 20s
+      timeout: 60s
+      retries: 10
+      start_period: 120s
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_MAX_CONNECTIONS=100
+    volumes:
+      - ./init/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./init/02_test_data.sql:/docker-entrypoint-initdb.d/02_test_data.sql
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    command: >
+      postgres
+        -c shared_buffers=512MB
+        -c work_mem=32MB
+        -c maintenance_work_mem=256MB
+        -c effective_cache_size=2GB
+        -c random_page_cost=1.1
+        -c max_parallel_workers=4
+        -c max_parallel_workers_per_gather=2
+        -c max_connections=100
+        -c synchronous_commit=off
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres-data:
+  backend-node-modules:
+    driver: local
+  ts-node-cache:
+    driver: local

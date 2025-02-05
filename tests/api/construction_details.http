@@ -1,0 +1,44 @@
+### 環境変数
+@baseUrl = http://localhost:3001/api
+
+### 工事詳細一覧の取得
+GET {{baseUrl}}/construction-details
+Content-Type: application/json
+
+### 工事詳細の取得
+GET {{baseUrl}}/construction-details/2
+Content-Type: application/json
+
+### 新規工事詳細の作成
+POST {{baseUrl}}/construction-details
+Content-Type: application/json
+
+{
+    "project_id": 1,
+    "contractor_id": 1,
+    "construction_date": "2024-03-20",
+    "completion_date": "2024-06-20",
+    "unit_price": 25000000,
+    "status": "planned",
+    "notes": "3階建て住宅の新築工事",
+    "progress": 0
+}
+
+### 工事詳細の更新
+PUT {{baseUrl}}/construction-details/1
+Content-Type: application/json
+
+{
+    "project_id": 1,
+    "contractor_id": 1,
+    "construction_date": "2024-03-20",
+    "completion_date": "2024-06-20",
+    "unit_price": 25000000,
+    "status": "planned",
+    "notes": "3階建て住宅",
+    "progress": 0
+}
+
+### 工事詳細の削除
+DELETE {{baseUrl}}/construction-details/8
+Content-Type: application/json 
