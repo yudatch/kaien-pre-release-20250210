@@ -1,0 +1,1 @@
+export declare function formatDate(date: string | Date | null | undefined): string; 

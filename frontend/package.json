@@ -1,0 +1,45 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx scripts/start-dev.ts",
+    "build": "next build",
+    "start": "tsx scripts/start-dev.ts --prod",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.5",
+    "@mui/system": "^5.15.0",
+    "@mui/x-data-grid": "^6.19.6",
+    "@mui/x-date-pickers": "^6.19.0",
+    "axios": "^1.7.7",
+    "concurrently": "^9.1.0",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "next": "14.0.4",
+    "open-cli": "^7.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^14.1.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/sequelize": "^4.28.20",
+    "critters": "^0.0.20",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5"
+  }
+}

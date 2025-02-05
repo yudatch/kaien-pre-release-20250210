@@ -1,0 +1,14 @@
+.git
+.next
+node_modules
+coverage
+.swc
+*.log
+.env*
+.dockerignore
+Dockerfile
+README.md
+.eslintrc*
+.prettierrc*
+jest.config*
+tsconfig.tsbuildinfo
