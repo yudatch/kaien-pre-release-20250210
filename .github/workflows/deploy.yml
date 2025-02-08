@@ -32,6 +32,7 @@ jobs:
       - name: install npm packages
         run: |
           echo "#install npm packages"
+          cd ..
           cd frontend
           npm install
       - name: backend deploy
