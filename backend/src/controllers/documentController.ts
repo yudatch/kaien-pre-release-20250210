@@ -72,6 +72,7 @@ export const getQuotationPreview = async (req: Request, res: Response): Promise<
           model: Project,
           include: [{ 
             model: Customer,
+            as: 'Customer',
             attributes: ['name', 'postal_code', 'address']
           }]
         },
@@ -116,6 +117,7 @@ export const getQuotationPreview = async (req: Request, res: Response): Promise<
             model: Project,
             include: [{ 
               model: Customer,
+              as: 'Customer',
               attributes: ['name', 'postal_code', 'address']
             }]
           }
@@ -171,8 +173,10 @@ export const getInvoicePreview = async (req: Request, res: Response): Promise<vo
       include: [
         {
           model: Project,
+          as: 'Project',
           include: [{ 
             model: Customer,
+            as: 'Customer',
             attributes: ['name', 'postal_code', 'address']
           }]
         },
