@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "#install npm packages"
           cd frontend
-          npm install
+          next build
       - name: backend deploy
         run: |
           echo "#amplify gen2 backend deploy"
