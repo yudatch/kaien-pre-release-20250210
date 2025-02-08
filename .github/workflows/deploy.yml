@@ -36,7 +36,7 @@ jobs:
           npm cache clean --force
           rm -rf node_modules
           rm package-lock.json
-          npm install
+          npm install --unsafe-perm
       - name: backend deploy
         run: |
           echo "#amplify gen2 backend deploy"
