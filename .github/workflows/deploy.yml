@@ -32,8 +32,10 @@ jobs:
       - name: install npm packages
         run: |
           echo "#install npm packages"
-          cd ..
           cd frontend
+          npm cache clean --force
+          rm -rf node_modules
+          rm package-lock.json
           npm install
       - name: backend deploy
         run: |
