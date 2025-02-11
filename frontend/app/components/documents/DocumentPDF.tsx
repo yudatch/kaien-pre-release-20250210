@@ -1,6 +1,7 @@
 import { Document as PDFDocument, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 import { Document } from '@/app/types/models/document';
 import { DOCUMENT_TYPE_LABELS } from '@/app/constants/document';
+import { DocumentType } from '@/app/contexts/DocumentTypeContext';
 
 // IPAフォントの登録
 Font.register({
@@ -98,7 +99,7 @@ export function DocumentPDF({ data }: DocumentPDFProps) {
           {process.env.NEXT_PUBLIC_COMPANY_PHONE && (
             <Text>TEL: {process.env.NEXT_PUBLIC_COMPANY_PHONE}</Text>
           )}
-          {data.type === 'invoice' && process.env.NEXT_PUBLIC_COMPANY_TAX_ID && (
+          {(data.type as DocumentType) === 'invoice' && process.env.NEXT_PUBLIC_COMPANY_TAX_ID && (
             <Text>適格請求書発行事業者 登録番号： {process.env.NEXT_PUBLIC_COMPANY_TAX_ID}</Text>
           )}
         </View>
@@ -142,7 +143,7 @@ export function DocumentPDF({ data }: DocumentPDFProps) {
           </View>
         </View>
 
-        {data.type === 'invoice' && (
+        {(data.type as DocumentType) === 'invoice' && (
           <View style={{ marginTop: 20 }}>
             <Text style={{ fontSize: 10 }}>
               ※ この請求書は、適格請求書等保存方式（インボイス制度）に対応した請求書です。
@@ -152,4 +153,4 @@ export function DocumentPDF({ data }: DocumentPDFProps) {
       </Page>
     </PDFDocument>
   );
-} 
+}  

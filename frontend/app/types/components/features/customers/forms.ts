@@ -2,6 +2,7 @@ import { Customer } from '@/app/types/customer';
 import { SelectChangeEvent } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { PaymentTerms, PaymentDueDays } from '@/app/constants/payment';
+import dayjs from 'dayjs';
 
 export interface CustomerFormData {
   customer_code: string;
@@ -35,7 +36,7 @@ export interface FormSelectFieldProps {
   label: string;
   value: string | number;
   onChange: (e: SelectChangeEvent<string | number>) => void;
-  options: { value: string | number; label: string; }[];
+  options: { readonly value: string | number; readonly label: string; }[] | readonly { readonly value: string | number; readonly label: string; }[];
   required?: boolean;
   disabled?: boolean;
   variant?: 'standard' | 'outlined' | 'filled';
@@ -51,4 +52,13 @@ export interface FormActionsProps {
 export const STATUS_OPTIONS = [
   { value: 'true', label: '有効' },
   { value: 'false', label: '無効' },
-]; 
+];
+
+export interface ContactFormData {
+  customerName: string;
+  contactDate: dayjs.Dayjs;
+  contactType: '訪問' | '電話' | 'メール';
+  staff: string;
+  description: string;
+  status: '未対応' | '対応中' | '完了';
+}  

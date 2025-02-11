@@ -14,12 +14,15 @@ type EditExpenseProps = {
 
 // ダミーデータ
 const DUMMY_EXPENSE: ExpenseFormData = {
-  date: dayjs('2024-03-15'),
+  expense_date: dayjs('2024-03-15'),
+  receipt_date: null,
   category: 'transportation',
   amount: '3500',
-  paymentMethod: 'credit_card',
+  payment_method: 'credit_card',
   description: '東京出張の新幹線代',
-  receiptImage: null
+  purpose: '',
+  receipt_image: null,
+  receipt_image_url: null
 };
 
 export default function EditExpense({ expenseId }: EditExpenseProps) {
@@ -62,8 +65,7 @@ export default function EditExpense({ expenseId }: EditExpenseProps) {
       <ExpenseForm
         mode="edit"
         initialData={expenseData}
-        onLoading={setLoading}
       />
     </Box>
   );
-} 
+}    
