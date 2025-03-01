@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PYTHONUNBUFFERED=1
+    command: streamlit run app/main.py
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PYTHONUNBUFFERED=1
+    command: celery -A app.celery_worker worker --loglevel=info
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
