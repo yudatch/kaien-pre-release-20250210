@@ -1,0 +1,13 @@
+{
+  "name": "メルカリ",
+  "url": "https://www.mercari.com/jp/",
+  "logo_threshold": 0.6,
+  "selectors": {
+    "search_box": "input[name='keyword']",
+    "search_button": "button.search-button",
+    "product_list": ".items-box",
+    "name": ".items-box-name",
+    "price": ".items-box-price",
+    "image": ".items-box-photo img @data-src"
+  }
+}

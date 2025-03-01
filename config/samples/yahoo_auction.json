@@ -1,0 +1,13 @@
+{
+  "name": "ヤフオク",
+  "url": "https://auctions.yahoo.co.jp/",
+  "logo_threshold": 0.55,
+  "selectors": {
+    "search_box": "input#acHdKwdTxt",
+    "search_button": "button.SearchButton__button",
+    "product_list": ".Product",
+    "name": ".Product__title",
+    "price": ".Product__priceValue",
+    "image": ".Product__imageData img @src"
+  }
+}

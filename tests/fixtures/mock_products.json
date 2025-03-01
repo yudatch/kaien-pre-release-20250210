@@ -1,0 +1,20 @@
+[
+  {
+    "name": "テスト商品1",
+    "price": "1,980円",
+    "image_url": "https://example.com/image1.jpg",
+    "url": "https://example.com/product1"
+  },
+  {
+    "name": "テスト商品2",
+    "price": "2,480円",
+    "image_url": "https://example.com/image2.jpg",
+    "url": "https://example.com/product2"
+  },
+  {
+    "name": "テスト商品3",
+    "price": "3,980円",
+    "image_url": "https://example.com/image3.jpg",
+    "url": "https://example.com/product3"
+  }
+]

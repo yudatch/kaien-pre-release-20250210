@@ -1,0 +1,13 @@
+{
+  "name": "テストサイト",
+  "url": "https://example.com",
+  "logo_threshold": 0.5,
+  "selectors": {
+    "search_box": "#search",
+    "search_button": "#searchBtn",
+    "product_list": ".product-item",
+    "name": ".product-name",
+    "price": ".product-price",
+    "image": ".product-image img @src"
+  }
+}
